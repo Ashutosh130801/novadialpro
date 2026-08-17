@@ -103,3 +103,4 @@ temp/
 public/dist/
 public/build/
 ```.next/
+.next/
