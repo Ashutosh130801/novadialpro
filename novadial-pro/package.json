@@ -1,0 +1,32 @@
+{
+  "name": "novadial-pro",
+  "version": "1.0.0",
+  "description": "The modern dialer built for the Dinstar ecosystem — softphone + auto‑dialer + AI copilot in one beautiful app.",
+  "private": true,
+  "workspaces": [
+    "client/desktop",
+    "client/web",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:web\"",
+    "dev:server": "npm run dev --workspace=server",
+    "dev:web": "npm run dev --workspace=client/web",
+    "dev:desktop": "npm run dev --workspace=client/desktop",
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "lint": "eslint . --ext .ts,.tsx",
+    "db:migrate": "npm run migrate --workspace=server"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "typescript": "^5.3.3",
+    "eslint": "^8.56.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}

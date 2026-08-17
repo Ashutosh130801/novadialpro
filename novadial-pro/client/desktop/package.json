@@ -1,0 +1,72 @@
+{
+  "name": "@novadial/desktop",
+  "version": "1.0.0",
+  "description": "NovaDial Pro Desktop Application",
+  "main": "src/main/main.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:main\" \"npm run dev:renderer\"",
+    "dev:main": "nodemon --watch src/main --exec electron .",
+    "dev:renderer": "webpack serve --mode development",
+    "build": "npm run build:renderer && npm run build:main",
+    "build:renderer": "webpack --mode production",
+    "build:main": "tsc --project tsconfig.main.json",
+    "package": "electron-builder",
+    "package:win": "electron-builder --win",
+    "package:mac": "electron-builder --mac",
+    "package:linux": "electron-builder --linux"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "redux": "^5.0.1",
+    "react-redux": "^9.1.0",
+    "@reduxjs/toolkit": "^2.0.1",
+    "sip.js": "^0.21.2",
+    "socket.io-client": "^4.6.1",
+    "axios": "^1.6.5",
+    "electron-store": "^8.1.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "electron": "^28.1.4",
+    "electron-builder": "^24.9.1",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "@types/node": "^20.11.5",
+    "typescript": "^5.3.3",
+    "webpack": "^5.90.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1",
+    "ts-loader": "^9.5.1",
+    "css-loader": "^6.9.1",
+    "style-loader": "^3.3.4",
+    "html-webpack-plugin": "^5.6.0",
+    "nodemon": "^3.0.3",
+    "concurrently": "^8.2.2"
+  },
+  "build": {
+    "appId": "com.novadial.pro",
+    "productName": "NovaDial Pro",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "build/**/*"
+    ],
+    "win": {
+      "target": ["nsis", "portable"],
+      "icon": "assets/icon.ico"
+    },
+    "mac": {
+      "target": ["dmg", "zip"],
+      "icon": "assets/icon.icns",
+      "category": "public.app-category.business"
+    },
+    "linux": {
+      "target": ["AppImage", "deb"],
+      "icon": "assets/icon.png",
+      "category": "Application"
+    }
+  }
+}
