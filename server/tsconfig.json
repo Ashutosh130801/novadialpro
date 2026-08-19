@@ -22,7 +22,6 @@
       "@middleware/*": ["./src/middleware/*"]
     },
     "resolveJsonModule": true,
-    "moduleResolution": "node",
     "typeRoots": ["./node_modules/@types"]
   },
   "include": ["src/**/*"],
