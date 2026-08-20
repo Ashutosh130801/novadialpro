@@ -9,6 +9,6 @@
     }
   ],
   "env": {
-    "REACT_APP_API_URL": "https://novadial-api.onrender.com"
+    "REACT_APP_API_URL": "https://novadialpro.onrender.com"
   }
 }
