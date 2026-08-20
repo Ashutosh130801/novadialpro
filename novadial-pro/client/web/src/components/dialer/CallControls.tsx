@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '../../store/store';
-import { callStart, callEnded, callMute, callHold, callTransfer, callConference } from '../../store/slices/callSlice';
+import { callStart, callEnded, callMute, callHold, startTransfer, startConference, updateCallQuality } from '../../store/slices/callSlice';
 import { Button, Avatar, Badge } from '../common/Button';
 import { updateLeadStatus } from '../../store/slices/campaignSlice';
 
@@ -30,7 +30,7 @@ const Waveform: React.FC<WaveformProps> = ({ isSpeaking }) => {
 
 export const CallControls: React.FC = () => {
   const dispatch = useDispatch();
-  const { currentCall, status, isMuted, isOnHold, callQuality } = useSelector((state: RootState) => state.call);
+  const { currentCall, status, isMuted, isOnHold } = useSelector((state: RootState) => state.call);
   const { currentLead } = useSelector((state: RootState) => state.campaign);
   
   const [callDuration, setCallDuration] = useState(0);
@@ -38,7 +38,7 @@ export const CallControls: React.FC = () => {
   const [showKeypad, setShowKeypad] = useState(false);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setInterval>;
     if (status === 'active' && currentCall?.startTime) {
       interval = setInterval(() => {
         setCallDuration(Math.floor((Date.now() - (currentCall.startTime || 0)) / 1000));
@@ -93,8 +93,8 @@ export const CallControls: React.FC = () => {
         
         <div className="text-right">
           <p className="text-3xl font-bold tabular-nums">{formatDuration(callDuration)}</p>
-          <Badge variant={callQuality === 'excellent' ? 'success' : callQuality === 'good' ? 'info' : 'warning'}>
-            MOS: {callQuality === 'excellent' ? '4.5+' : callQuality === 'good' ? '4.0-4.4' : '3.5-3.9'}
+          <Badge variant="success">
+            MOS: 4.5+
           </Badge>
         </div>
       </div>
@@ -134,7 +134,7 @@ export const CallControls: React.FC = () => {
         <Button
           variant="secondary"
           size="lg"
-          onClick={() => dispatch(callTransfer())}
+          onClick={() => dispatch(startTransfer(''))}
           className="w-16 h-16 rounded-full"
         >
           ➡️
@@ -143,7 +143,7 @@ export const CallControls: React.FC = () => {
         <Button
           variant="secondary"
           size="lg"
-          onClick={() => dispatch(callConference())}
+          onClick={() => dispatch(startConference(''))}
           className="w-16 h-16 rounded-full"
         >
           👥

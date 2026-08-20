@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '../../store/store';
 import { Button, Card, Badge, Avatar } from '../common/Button';
-import { setAgentStatus } from '../../store/slices/agentSlice';
+import { setStatus } from '../../store/slices/agentSlice';
 
 interface AgentGridItem {
   id: string;
