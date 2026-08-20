@@ -47,9 +47,9 @@ export const DashboardPage: React.FC = () => {
               key={item.path}
               to={item.path}
               className="flex items-center gap-3 p-3 rounded-lg transition-all hover:bg-white/10"
-              style={({ isActive }) => ({
-                background: isActive ? 'rgba(124, 92, 255, 0.2)' : 'transparent',
-                color: isActive ? '#7C5CFF' : '#ffffff',
+              style={(props: any) => ({
+                background: props.isActive ? 'rgba(124, 92, 255, 0.2)' : 'transparent',
+                color: props.isActive ? '#7C5CFF' : '#ffffff',
               })}
             >
               <span>{item.icon}</span>
@@ -62,9 +62,9 @@ export const DashboardPage: React.FC = () => {
               key={item.path}
               to={item.path}
               className="flex items-center gap-3 p-3 rounded-lg transition-all hover:bg-white/10"
-              style={({ isActive }) => ({
-                background: isActive ? 'rgba(124, 92, 255, 0.2)' : 'transparent',
-                color: isActive ? '#7C5CFF' : '#ffffff',
+              style={(props: any) => ({
+                background: props.isActive ? 'rgba(124, 92, 255, 0.2)' : 'transparent',
+                color: props.isActive ? '#7C5CFF' : '#ffffff',
               })}
             >
               <span>{item.icon}</span>
@@ -77,9 +77,9 @@ export const DashboardPage: React.FC = () => {
               key={item.path}
               to={item.path}
               className="flex items-center gap-3 p-3 rounded-lg transition-all hover:bg-white/10"
-              style={({ isActive }) => ({
-                background: isActive ? 'rgba(124, 92, 255, 0.2)' : 'transparent',
-                color: isActive ? '#7C5CFF' : '#ffffff',
+              style={(props: any) => ({
+                background: props.isActive ? 'rgba(124, 92, 255, 0.2)' : 'transparent',
+                color: props.isActive ? '#7C5CFF' : '#ffffff',
               })}
             >
               <span>{item.icon}</span>

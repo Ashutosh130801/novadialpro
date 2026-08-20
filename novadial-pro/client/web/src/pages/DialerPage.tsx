@@ -12,7 +12,7 @@ export const DialerPage: React.FC = () => {
   const [callDuration, setCallDuration] = useState(0);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setInterval>;
     if (status === 'active' && currentCall?.startTime) {
       interval = setInterval(() => {
         setCallDuration(Math.floor((Date.now() - (currentCall.startTime || 0)) / 1000));
