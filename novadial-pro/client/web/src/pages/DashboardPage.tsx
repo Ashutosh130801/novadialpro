@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet, Link, useNavigate } from 'react-router-dom';
+import { Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../store/slices/authSlice';
 import { setStatus } from '../store/slices/agentSlice';
@@ -8,6 +8,7 @@ import type { RootState } from '../store/store';
 export const DashboardPage: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const { user } = useSelector((state: RootState) => state.auth);
   const { status: agentStatus } = useSelector((state: RootState) => state.agent);
 
@@ -15,6 +16,8 @@ export const DashboardPage: React.FC = () => {
     dispatch(logout());
     navigate('/login');
   };
+
+  const isActive = (path: string) => location.pathname === path || location.pathname.startsWith(path + '/');
 
   const navItems = [
     { path: 'dialer', label: 'Dialer', icon: '📞' },
@@ -43,48 +46,36 @@ export const DashboardPage: React.FC = () => {
 
         <nav className="flex-1 space-y-2">
           {navItems.map((item) => (
-            <Link
+            <NavLink
               key={item.path}
               to={item.path}
-              className="flex items-center gap-3 p-3 rounded-lg transition-all hover:bg-white/10"
-              style={(props: any) => ({
-                background: props.isActive ? 'rgba(124, 92, 255, 0.2)' : 'transparent',
-                color: props.isActive ? '#7C5CFF' : '#ffffff',
-              })}
-            >
+              className={`flex items-center gap-3 p-3 rounded-lg transition-all hover:bg-white/10 ${isActive(item.path) ? 'bg-white/10' : ''}`}
+              >
               <span>{item.icon}</span>
               <span>{item.label}</span>
-            </Link>
+            </NavLink>
           ))}
 
           {user?.role === 'supervisor' && supervisorItems.map((item) => (
-            <Link
+            <NavLink
               key={item.path}
               to={item.path}
               className="flex items-center gap-3 p-3 rounded-lg transition-all hover:bg-white/10"
-              style={(props: any) => ({
-                background: props.isActive ? 'rgba(124, 92, 255, 0.2)' : 'transparent',
-                color: props.isActive ? '#7C5CFF' : '#ffffff',
-              })}
-            >
+              >
               <span>{item.icon}</span>
               <span>{item.label}</span>
-            </Link>
+            </NavLink>
           ))}
 
           {(user?.role === 'admin' || user?.role === 'owner') && adminItems.map((item) => (
-            <Link
+            <NavLink
               key={item.path}
               to={item.path}
               className="flex items-center gap-3 p-3 rounded-lg transition-all hover:bg-white/10"
-              style={(props: any) => ({
-                background: props.isActive ? 'rgba(124, 92, 255, 0.2)' : 'transparent',
-                color: props.isActive ? '#7C5CFF' : '#ffffff',
-              })}
-            >
+              >
               <span>{item.icon}</span>
               <span>{item.label}</span>
-            </Link>
+            </NavLink>
           ))}
         </nav>
 
