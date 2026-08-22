@@ -48,6 +48,7 @@ app.use('/api/calls', require('./routes/calls').default);
 app.use('/api/campaigns', require('./routes/campaigns').default);
 app.use('/api/contacts', require('./routes/contacts').default);
 app.use('/api/gateways', require('./routes/gateways').default);
+app.use('/api/dialer', require('./routes/dialer').default);
 
 // Socket.IO connection handling
 io.on('connection', (socket) => {
